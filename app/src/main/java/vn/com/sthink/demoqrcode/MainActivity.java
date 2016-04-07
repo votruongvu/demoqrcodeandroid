@@ -47,19 +47,27 @@ public class MainActivity extends  AppCompatActivity {
         integrator.initiateScan();
     }
 
+    private void sendSMS(String content){
+        Intent sendSMSIntent = new Intent(Intent.ACTION_VIEW);
+        sendSMSIntent.putExtra("sms_body", content);
+        sendSMSIntent.setType("vnd.android-dir/mms-sms");
+        startActivity(sendSMSIntent);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (scanResult != null) {
             if (IntentIntegrator.QR_CODE_TYPES.contains(scanResult.getFormatName())) {
-                Toast.makeText(this,scanResult.getContents(), Toast.LENGTH_SHORT).show();
-                new android.os.Handler().postDelayed(
-                        new Runnable() {
-                            public void run() {
-                                initQRScanner();
-                            }
-                        },
-                        2000);
+                //Toast.makeText(this,scanResult.getContents(), Toast.LENGTH_SHORT).show();
+                sendSMS(scanResult.getContents());
+//                new android.os.Handler().postDelayed(
+//                        new Runnable() {
+//                            public void run() {
+//                                initQRScanner();
+//                            }
+//                        },
+//                        2000);
             } else {
                 Toast.makeText(this, "Bad Format", Toast.LENGTH_SHORT).show();
                 initQRScanner();
