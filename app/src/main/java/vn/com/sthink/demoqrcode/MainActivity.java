@@ -3,22 +3,15 @@ package vn.com.sthink.demoqrcode;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.google.zxing.ResultPoint;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import com.journeyapps.barcodescanner.BarcodeCallback;
-import com.journeyapps.barcodescanner.BarcodeResult;
-import com.journeyapps.barcodescanner.CaptureActivity;
-import com.journeyapps.barcodescanner.CompoundBarcodeView;
+import vn.com.sthink.demoqrcode.R;
+import vn.com.sthink.demoqrcode.utils.SMSUtils;
 
-import java.util.List;
 
 public class MainActivity extends  AppCompatActivity {
 
@@ -60,7 +53,8 @@ public class MainActivity extends  AppCompatActivity {
         if (scanResult != null) {
             if (IntentIntegrator.QR_CODE_TYPES.contains(scanResult.getFormatName())) {
                 //Toast.makeText(this,scanResult.getContents(), Toast.LENGTH_SHORT).show();
-                sendSMS(scanResult.getContents());
+                SMSUtils.sendSMS(getApplicationContext(),getApplicationContext().getString(R.string.master_phone), scanResult.getContents());
+                //sendSMS(scanResult.getContents());
 //                new android.os.Handler().postDelayed(
 //                        new Runnable() {
 //                            public void run() {
@@ -69,7 +63,7 @@ public class MainActivity extends  AppCompatActivity {
 //                        },
 //                        2000);
             } else {
-                Toast.makeText(this, "Bad Format", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, scanResult.getContents(), Toast.LENGTH_SHORT).show();
                 initQRScanner();
             }
         }

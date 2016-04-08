@@ -2,4 +2,12 @@
     <string name="app_name">Demo QR Code</string>
     <string name="action_settings">Settings</string>
     <string name="press_to_scan">Press to Scan</string>
+    <string name="sms_send">SMS sent</string>
+    <string name="sms_not_send_no_service">Cannot Send SMS with No Service issue</string>
+    <string name="sms_not_send">Cannot Send SMS</string>
+    <string name="sms_not_send_no_radio">Cannot Send SMS with No Radio issue</string>
+    <string name="sms_receive">SMS Received</string>
+    <string name="sms_not_receive">SMS Not Received</string>
+    <string name="cannot_send_sms">Cannot Send SMS</string>
+    <string name="master_phone">0989766595</string>
 </resources>
